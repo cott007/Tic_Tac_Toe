@@ -1,0 +1,19 @@
+body {
+	background-image: url("../img/umbrella_background.jpg");
+	background-size: cover;
+}
+
+.container{
+	height: 630px;
+	width: 630px;
+}
+
+.box {
+	display: inline-block;
+	height: 200px;
+	width: 200px;
+	border: 3px solid #940101;
+	margin: -3px;
+	background-color: rgba(148, 1, 1, .2);
+	border-radius: 10px;
+}
