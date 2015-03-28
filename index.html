@@ -10,15 +10,11 @@
 	</section>
 
 	<div class="container"> <!-- tic_tac_toe board -->
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
-		<div class="box"></div>
+		<div class="box" ng-repeat="uc in uss.listOfBoxes" ng-click="uss.addMove($index)">
+			<img ng-src={{uc.image}}> 
+			<p>{{uc.player}}</p>
+		</div>
+		
 	</div>
 
 
