@@ -12,7 +12,7 @@
 	<div class="container"> <!-- tic_tac_toe board -->
 		<div>
 			<p>
-				Score:<span>{{uss.scoreP1}}</span>
+				Score: {{uss.scoreP1}}
 			</p>
 		</div>
 		<div class="box" ng-repeat="uc in uss.listOfBoxes" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
