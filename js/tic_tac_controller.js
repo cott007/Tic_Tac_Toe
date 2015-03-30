@@ -17,7 +17,7 @@ angular.
 		{image:"img/blank.gif", player: ""}, {image:"img/blank.gif", player: ""}, {image:"img/blank.gif", player: ""}
 		]
 		
-		
+		omg omg omg
 
 		function addMove($index){
 			if (currentPlayer == "a"){
@@ -29,41 +29,56 @@ angular.
 				self.listOfBoxes[$index].player = "b";
 				currentPlayer = "a";
 			};
-			getWinner();
 		};
 
 		function getWinner(){
 			if (self.listOfBoxes[0].player === "a" && self.listOfBoxes[1].player === "a" && self.listOfBoxes[2].player === "a"){
 				scoreP1 ++;
+				alert("A wins!");
 			} else if (self.listOfBoxes[3].player === "a" && self.listOfBoxes[4].player === "a" && self.listOfBoxes[5].player === "a") {
 				scoreP1 ++;
+				alert("A wins!");
 			} else if (self.listOfBoxes[6].player === "a" && self.listOfBoxes[7].player === "a" && self.listOfBoxes[8].player === "a") {
 				scoreP1 ++;
+				alert("A wins!");
 			} else if (self.listOfBoxes[0].player === "a" && self.listOfBoxes[4].player === "a" && self.listOfBoxes[8].player === "a") {
+				scoreP1 ++;
 				alert("A wins!");
 			} else if (self.listOfBoxes[2].player === "a" && self.listOfBoxes[5].player === "a" && self.listOfBoxes[8].player === "a") {
+				scoreP1 ++;
 				alert("A wins!");
 			} else if (self.listOfBoxes[0].player === "a" && self.listOfBoxes[3].player === "a" && self.listOfBoxes[6].player === "a") {
+				scoreP1 ++;
 				alert("A wins!");
 			} else if (self.listOfBoxes[1].player === "a" && self.listOfBoxes[4].player === "a" && self.listOfBoxes[7].player === "a") {
+				scoreP1 ++;
 				alert("A wins!");
 			} else if (self.listOfBoxes[2].player === "a" && self.listOfBoxes[5].player === "a" && self.listOfBoxes[8].player === "a") {
+				scoreP1 ++;
 				alert("A wins!");
 			} else if (self.listOfBoxes[0].player === "b" && self.listOfBoxes[1].player === "b" && self.listOfBoxes[2].player === "b"){
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[3].player === "b" && self.listOfBoxes[4].player === "b" && self.listOfBoxes[5].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[6].player === "b" && self.listOfBoxes[7].player === "b" && self.listOfBoxes[8].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[0].player === "b" && self.listOfBoxes[4].player === "b" && self.listOfBoxes[8].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[2].player === "b" && self.listOfBoxes[5].player === "b" && self.listOfBoxes[8].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[0].player === "b" && self.listOfBoxes[3].player === "b" && self.listOfBoxes[6].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[1].player === "b" && self.listOfBoxes[4].player === "b" && self.listOfBoxes[7].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else if (self.listOfBoxes[2].player === "b" && self.listOfBoxes[5].player === "b" && self.listOfBoxes[8].player === "b") {
+				scoreP2 ++;
 				alert("B wins!");
 			} else {
 				null;
