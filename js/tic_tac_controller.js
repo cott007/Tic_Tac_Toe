@@ -17,7 +17,6 @@ angular.
 		{image:"img/blank.gif", player: ""}, {image:"img/blank.gif", player: ""}, {image:"img/blank.gif", player: ""}
 		]
 		
-		omg omg omg
 
 		function addMove($index){
 			if (currentPlayer == "a"){
