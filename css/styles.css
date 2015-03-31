@@ -1,20 +1,72 @@
 body {
 	background-image: url("../img/umbrella_background.jpg");
 	background-size: cover;
+	background-position: center;
+	text-align: center;
+}
+
+/*#playerSection {
+	border: 4px solid #940101;
+	border-radius: 10px;
+	background-color: rgba(148, 1, 1, .2);
+	display: inline-block;
+	width: 618px;
+}*/
+
+#player1 {
+	display: inline-block;
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	border: 4px solid #980002;
+	border-radius: 10px;
+	background-color: rgba(152, 0, 2, .2);
+}
+
+#player2{
+	display: inline-block;
+	float: right;
+
+	border: 4px solid #980002;
+	border-radius: 10px;
+	background-color: rgba(152, 0, 2, .2);
+}
+
+#ubcs {
+	width: 90px;
+	height: 75px;
+}
+
+#rpd {
+	width: 90px;
+	height: 90px;
+	margin-right: 12px;
+}
+
+h1 {
+	margin: 0px 5px 0px 5px;
+}
+
+p {
+	margin: 0px 5px 0px 5px;
 }
 
 .container{
 	height: 630px;
 	width: 630px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
 }
 
 .box {
 	display: inline-block;
 	height: 200px;
 	width: 200px;
-	border: 3px solid #940101;
+	border: 3px solid #980002;
 	margin: -2px;
-	background-color: rgba(148, 1, 1, .2);
+	background-color: rgba(152, 0, 2, .2);
 	border-radius: 10px;
 }
 
@@ -33,3 +85,14 @@ img {
 p {
 	color: white;
 }
+
+#ngButton{
+	margin-top: 30px;
+	font-size: 30px;
+	border-radius: 5px;
+	background-color: #980002;
+	border-color: #980002;
+}
+
+
+

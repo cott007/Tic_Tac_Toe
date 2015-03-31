@@ -5,24 +5,26 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body ng-controller="UmbrellaController as uss">
-	<section id="playerSection"> <!-- player section -->
-		<div>
+	<!-- <section id="playerSection"> --> <!-- player section -->
+		<div id="player1">
 			<h1>Player 1: {{uss.name}}</h1>
 			<div>
 				<p>
 					Score: {{uss.scoreP1}}
 				</p>
+				<img src="img/UBCS.png" id="ubcs">
 			</div>
 		</div>
-		<div>
+		<div id="player2">
 			<h1>Player 2: {{uss.name2}}</h1>
 			<div>
 				<p>
-					Score: {{uss.scoreP2}}
+					Score: {{uss.scoreP2}}	
 				</p>
+				<img src="img/raccoon_city_stars.png" id="rpd">
 			</div>
 		</div>
-	</section>
+	<!-- </section> -->
 
 	<div class="container"> <!-- tic_tac_toe board -->
 		
@@ -31,7 +33,7 @@
 			<p id="boxp">{{uc.player}}</p>
 		</div>
 		<div>
-			<button ng-click="uss.newGame()">New Game</button>
+			<button ng-click="uss.newGame()" id="ngButton">New Game</button>
 		</div>
 	</div>
 
