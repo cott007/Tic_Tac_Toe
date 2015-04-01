@@ -29,7 +29,7 @@
 	<!-- tic_tac_toe board -->
 	<div class="container"> 
 		
-		<div class="box" ng-repeat="uc in uss.boxes.listOfBoxes" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
+		<div class="box" ng-repeat="uc in uss.boxes.slots" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
 			<img ng-src={{uc.image}}> 
 		</div>
 		<div>

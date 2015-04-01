@@ -6,19 +6,12 @@ angular.
 
 	function UmbrellaController($firebaseObject){
 		var self = this;
-		var currentPlayer = "a";
-		var scoreP1 = 0;
-		var scoreP2 = 0;
-		var gameOver = "no";
-		var moves = 0;
 		var name = "Curtis"
 		var name2 = "Nancy"
 
 		self.boxes = syncGameWithFirebase();
 		self.addMove = addMove;
 		self.getWinner = getWinner;
-		self.scoreP1 = scoreP1;
-		self.scoreP2 = scoreP2;
 		self.newGame = newGame;
 		self.name = name;
 		self.name2 = name2;
@@ -33,10 +26,11 @@ angular.
 				gameObject.currentPlayer = "a";
 				gameObject.scoreP1 = 0;
 				gameObject.scoreP2 = 0;
-				gameObject.listOfBoxes = [];
+				gameObject.moves = 0;
+				gameObject.slots = [];
 
 				for (var i = 0; i < 9; i++) {
-					gameObject.listOfBoxes.push({image:"img/blank.gif", player: ""});
+					gameObject.slots.push({image:"img/blank.gif", player: ""});
 				}
 
 				gameObject.$save();
@@ -47,23 +41,23 @@ angular.
 
 
 		function addMove($index){
-			if (gameOver == "yes") {
+			if (self.boxes.gameOver == "yes") {
 				alert("Please start a new game!");
 			} else {
-				if (self.boxes.listOfBoxes[$index].image == "img/UBCS.png" || self.boxes.listOfBoxes[$index].image == "img/raccoon_city_stars.png"){
+				if (self.boxes.slots[$index].image == "img/UBCS.png" || self.boxes.slots[$index].image == "img/raccoon_city_stars.png"){
 					alert("Invalid Move");
 				} else {
 					if (self.boxes.currentPlayer == "a"){
-						self.boxes.listOfBoxes[$index].image = "img/UBCS.png";
-						self.boxes.listOfBoxes[$index].player = "a";
+						self.boxes.slots[$index].image = "img/UBCS.png";
+						self.boxes.slots[$index].player = "a";
 						self.boxes.currentPlayer = "b";
-						moves ++;
+						self.boxes.moves ++;
 						self.boxes.$save();
 					} else {
-						self.boxes.listOfBoxes[$index].image = "img/raccoon_city_stars.png";
-						self.boxes.listOfBoxes[$index].player = "b";
+						self.boxes.slots[$index].image = "img/raccoon_city_stars.png";
+						self.boxes.slots[$index].player = "b";
 						self.boxes.currentPlayer = "a";
-						moves ++;
+						self.boxes.moves ++;
 						self.boxes.$save();
 					};
 				};
@@ -73,34 +67,34 @@ angular.
 
 		function getWinner(){
 			
-			if((self.boxes.listOfBoxes[0].player === "a" && self.boxes.listOfBoxes[1].player === "a" && self.boxes.listOfBoxes[2].player === "a")||
-				(self.boxes.listOfBoxes[3].player === "a" && self.boxes.listOfBoxes[4].player === "a" && self.boxes.listOfBoxes[5].player === "a")||
-				(self.boxes.listOfBoxes[6].player === "a" && self.boxes.listOfBoxes[7].player === "a" && self.boxes.listOfBoxes[8].player === "a")||
-				(self.boxes.listOfBoxes[0].player === "a" && self.boxes.listOfBoxes[3].player === "a" && self.boxes.listOfBoxes[6].player === "a")||
-				(self.boxes.listOfBoxes[1].player === "a" && self.boxes.listOfBoxes[4].player === "a" && self.boxes.listOfBoxes[7].player === "a")||
-				(self.boxes.listOfBoxes[2].player === "a" && self.boxes.listOfBoxes[5].player === "a" && self.boxes.listOfBoxes[8].player === "a")||
-				(self.boxes.listOfBoxes[0].player === "a" && self.boxes.listOfBoxes[4].player === "a" && self.boxes.listOfBoxes[8].player === "a")||
-				(self.boxes.listOfBoxes[2].player === "a" && self.boxes.listOfBoxes[4].player === "a" && self.boxes.listOfBoxes[6].player === "a")) {
+			if((self.boxes.slots[0].player === "a" && self.boxes.slots[1].player === "a" && self.boxes.slots[2].player === "a")||
+				(self.boxes.slots[3].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[5].player === "a")||
+				(self.boxes.slots[6].player === "a" && self.boxes.slots[7].player === "a" && self.boxes.slots[8].player === "a")||
+				(self.boxes.slots[0].player === "a" && self.boxes.slots[3].player === "a" && self.boxes.slots[6].player === "a")||
+				(self.boxes.slots[1].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[7].player === "a")||
+				(self.boxes.slots[2].player === "a" && self.boxes.slots[5].player === "a" && self.boxes.slots[8].player === "a")||
+				(self.boxes.slots[0].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[8].player === "a")||
+				(self.boxes.slots[2].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[6].player === "a")) {
 					self.boxes.scoreP1 ++;
 					alert(self.name + " wins!");
 					self.boxes.currentPlayer = "a";
 					self.boxes.gameOver = "yes";
 					self.boxes.$save();
-			} else if((self.boxes.listOfBoxes[0].player === "b" && self.boxes.listOfBoxes[1].player === "b" && self.boxes.listOfBoxes[2].player === "b")||
-				(self.boxes.listOfBoxes[3].player === "b" && self.boxes.listOfBoxes[4].player === "b" && self.boxes.listOfBoxes[5].player === "b")||
-				(self.boxes.listOfBoxes[6].player === "b" && self.boxes.listOfBoxes[7].player === "b" && self.boxes.listOfBoxes[8].player === "b")||
-				(self.boxes.listOfBoxes[0].player === "b" && self.boxes.listOfBoxes[3].player === "b" && self.boxes.listOfBoxes[6].player === "b")||
-				(self.boxes.listOfBoxes[1].player === "b" && self.boxes.listOfBoxes[4].player === "b" && self.boxes.listOfBoxes[7].player === "b")||
-				(self.boxes.listOfBoxes[2].player === "b" && self.boxes.listOfBoxes[5].player === "b" && self.boxes.listOfBoxes[8].player === "b")||
-				(self.boxes.listOfBoxes[0].player === "b" && self.boxes.listOfBoxes[4].player === "b" && self.boxes.listOfBoxes[8].player === "b")||
-				(self.boxes.listOfBoxes[2].player === "b" && self.boxes.listOfBoxes[4].player === "b" && self.boxes.listOfBoxes[6].player === "b")) {
+			} else if((self.boxes.slots[0].player === "b" && self.boxes.slots[1].player === "b" && self.boxes.slots[2].player === "b")||
+				(self.boxes.slots[3].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[5].player === "b")||
+				(self.boxes.slots[6].player === "b" && self.boxes.slots[7].player === "b" && self.boxes.slots[8].player === "b")||
+				(self.boxes.slots[0].player === "b" && self.boxes.slots[3].player === "b" && self.boxes.slots[6].player === "b")||
+				(self.boxes.slots[1].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[7].player === "b")||
+				(self.boxes.slots[2].player === "b" && self.boxes.slots[5].player === "b" && self.boxes.slots[8].player === "b")||
+				(self.boxes.slots[0].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[8].player === "b")||
+				(self.boxes.slots[2].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[6].player === "b")) {
 					self.boxes.scoreP2 ++;
 					alert(self.name2 + " wins!");
 					self.boxes.currentPlayer = "a";
 					self.boxes.gameOver = "yes";
 					self.boxes.$save();
 			} else {
-				if (moves == 9) {
+				if (self.boxes.moves == 9) {
 					alert("This has ended in a Tie!");
 					self.boxes.gameOver = "yes";
 				} else {
@@ -116,11 +110,10 @@ angular.
 				moves = 0;	
 			
 				for (i = 0; i < 9; i++){
-					self.boxes.listOfBoxes[i].image = "img/blank.gif";
-					self.boxes.listOfBoxes[i].player = "";
+					self.boxes.slots[i].image = "img/blank.gif";
+					self.boxes.slots[i].player = "";
 				}
 				self.boxes.$save();
-
 			} else {
 				null;
 			}; 
