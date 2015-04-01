@@ -5,12 +5,12 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body ng-controller="UmbrellaController as uss">
-	<!-- <section id="playerSection"> --> <!-- player section -->
+	<!-- player section -->
 		<div id="player1">
 			<h1>Player 1: {{uss.name}}</h1>
 			<div>
 				<p>
-					Score: {{uss.scoreP1}}
+					Score: {{uss.boxes.scoreP1}}
 				</p>
 				<img src="img/UBCS.png" id="ubcs">
 			</div>
@@ -19,25 +19,25 @@
 			<h1>Player 2: {{uss.name2}}</h1>
 			<div>
 				<p>
-					Score: {{uss.scoreP2}}	
+					Score: {{uss.boxes.scoreP2}}	
 				</p>
 				<img src="img/raccoon_city_stars.png" id="rpd">
 			</div>
 		</div>
-	<!-- </section> -->
+	<!--  player section -->
 
-	<div class="container"> <!-- tic_tac_toe board -->
+	<!-- tic_tac_toe board -->
+	<div class="container"> 
 		
-		<div class="box" ng-repeat="uc in uss.listOfBoxes" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
+		<div class="box" ng-repeat="uc in uss.boxes.listOfBoxes" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
 			<img ng-src={{uc.image}}> 
-			<p id="boxp">{{uc.player}}</p>
 		</div>
 		<div>
 			<button ng-click="uss.newGame()" id="ngButton">New Game</button>
 		</div>
 	</div>
-
-	
+	<!-- tic_tac_toe board -->
+	 
 
 
 
@@ -58,6 +58,8 @@
 
 
 <script type="text/javascript" src="js/angular.js"></script> <!-- sourcing angular -->
+<script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script> <!-- sourcing module -->
 <script type="text/javascript" src="js/tic_tac_controller.js"></script> <!-- sourcing controller -->
 </body>
