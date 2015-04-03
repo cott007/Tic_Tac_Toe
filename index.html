@@ -5,56 +5,65 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body ng-controller="UmbrellaController as uss">
-	<!-- player section -->
+	<!-- first page intro start -->
+ 	<div id="page1" ng-hide="uss.page">
+ 		
+ 		<div id="player1" ng-hide="uss.fire.player1Chooses">
+ 			<form ng-submit="uss.addPlayer1Name(); uss.nextPage()"><h1>Player 1: <input type="text" ng-model="uss.playerOneName"></h1></form>
+			<div>
+				<img src="img/UBCS.png" id="ubcs">
+			</div>
+		</div>
+
+		
+		<div id="player2" ng-show="uss.fire.player1Chooses">
+			<form ng-submit="uss.addPlayer2Name(); uss.nextPage()"><h1>Player 2: <input type="text" ng-model="uss.playerTwoName"></h1></form>
+			<div>
+				<img src="img/raccoon_city_stars.png" id="rpd">
+			</div>
+		</div>
+
+ 	</div>
+ 	<!-- first page intro end -->
+
+ 	<!-- second page with game board start-->
+	<div id="page2" ng-show="uss.page">
+		<!-- player 1 section start-->
 		<div id="player1">
-			<h1>Player 1: {{uss.name}}</h1>
+			<h1>Player 1: {{uss.fire.nameP1}}</h1>
 			<div>
 				<p>
-					Score: {{uss.boxes.scoreP1}}
+					Score: {{uss.fire.scoreP1}}
 				</p>
 				<img src="img/UBCS.png" id="ubcs">
 			</div>
 		</div>
+		<!-- player 1 section end -->
+		<!-- player 2 section begin -->
 		<div id="player2">
-			<h1>Player 2: {{uss.name2}}</h1>
+			<h1>Player 2: {{uss.fire.nameP2}}</h1>
 			<div>
 				<p>
-					Score: {{uss.boxes.scoreP2}}	
+					Score: {{uss.fire.scoreP2}}	
 				</p>
 				<img src="img/raccoon_city_stars.png" id="rpd">
 			</div>
 		</div>
-	<!--  player section -->
+		<!--  player 2 section end-->
 
-	<!-- tic_tac_toe board -->
-	<div class="container"> 
-		
-		<div class="box" ng-repeat="uc in uss.boxes.slots" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
-			<img ng-src={{uc.image}}> 
+		<!-- tic_tac_toe board start-->
+		<div class="container"> 	
+			<div class="box" ng-repeat="uc in uss.fire.slots" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
+				<img ng-src={{uc.image}}> 
+			</div>
+			<div>
+				<button ng-click="uss.newGame()" id="ngButton">New Game</button>
+			</div>
 		</div>
-		<div>
-			<button ng-click="uss.newGame()" id="ngButton">New Game</button>
-		</div>
-	</div>
-	<!-- tic_tac_toe board -->
-	 
+		<!-- tic_tac_toe board end-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	</div> 
+	<!-- second page with game board -->
 
 
 <script type="text/javascript" src="js/angular.js"></script> <!-- sourcing angular -->

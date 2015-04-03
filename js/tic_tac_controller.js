@@ -6,16 +6,26 @@ angular.
 
 	function UmbrellaController($firebaseObject){
 		var self = this;
-		var name = "Curtis"
-		var name2 = "Nancy"
 
-		self.boxes = syncGameWithFirebase();
+
+		self.fire = syncGameWithFirebase(); 
+		
+		self.playerCount = 0;
+
+		self.page;
+		self.nextPage = nextPage;
+		
 		self.addMove = addMove;
 		self.getWinner = getWinner;
 		self.newGame = newGame;
-		self.name = name;
-		self.name2 = name2;
+		
+		self.playerOneName;
+		self.addPlayer1Name = addPlayer1Name;
+		self.playerTwoName;
+		self.addPlayer2Name = addPlayer2Name;
 
+		
+		//Syncing with Firebase start
 		function syncGameWithFirebase(){
 			var ref = new Firebase('https://ubcs-vs-stars.firebaseio.com/');
 			var gameObject = $firebaseObject(ref);
@@ -24,100 +34,132 @@ angular.
 			gameObject.$loaded(function(){
 				gameObject.gameOver = "no";
 				gameObject.currentPlayer = "a";
-				gameObject.scoreP1 = 0;
-				gameObject.scoreP2 = 0;
-				gameObject.moves = 0;
+				
+				gameObject.player1Chooses = false;
+
 				gameObject.slots = [];
-
 				for (var i = 0; i < 9; i++) {
-					gameObject.slots.push({image:"img/blank.gif", player: ""});
-				}
-
+						gameObject.slots.push({image:"img/blank.gif", player: ""});
+					};
+			
+				
 				gameObject.$save();
 			});
 
 			return gameObject;
 		} 
+		//Syncing with Firebase start end
 
+		//Intro page to Gameboard Page. start
+		function nextPage(){
+			self.page = true;
+		}
+		//Intro page to Gameboard. Page end
 
+		//Adding the Player Move. Called every mousedown. start
 		function addMove($index){
-			if (self.boxes.gameOver == "yes") {
+			if (self.fire.gameOver == "yes") {
 				alert("Please start a new game!");
 			} else {
-				if (self.boxes.slots[$index].image == "img/UBCS.png" || self.boxes.slots[$index].image == "img/raccoon_city_stars.png"){
+				if (self.fire.slots[$index].image == "img/UBCS.png" || self.fire.slots[$index].image == "img/raccoon_city_stars.png"){
 					alert("Invalid Move");
 				} else {
-					if (self.boxes.currentPlayer == "a"){
-						self.boxes.slots[$index].image = "img/UBCS.png";
-						self.boxes.slots[$index].player = "a";
-						self.boxes.currentPlayer = "b";
-						self.boxes.moves ++;
-						self.boxes.$save();
-					} else {
-						self.boxes.slots[$index].image = "img/raccoon_city_stars.png";
-						self.boxes.slots[$index].player = "b";
-						self.boxes.currentPlayer = "a";
-						self.boxes.moves ++;
-						self.boxes.$save();
+					if (self.fire.currentPlayer == "a" && self.playerCount == 0){
+						self.fire.slots[$index].image = "img/UBCS.png";
+						self.fire.slots[$index].player = "a";
+						self.fire.currentPlayer = "b";
+						self.fire.moves ++;
+						self.fire.$save();
+					} else if (self.fire.currentPlayer == "b" && self.playerCount == 1){
+						self.fire.slots[$index].image = "img/raccoon_city_stars.png";
+						self.fire.slots[$index].player = "b";
+						self.fire.currentPlayer = "a";
+						self.fire.moves ++;
+						self.fire.$save();
 					};
 				};
 			};
 		};
+		//Adding the Player Move. Called every mousedown. end
 
-
+		//Getting the Winner. Called every mouseup. start
 		function getWinner(){
 			
-			if((self.boxes.slots[0].player === "a" && self.boxes.slots[1].player === "a" && self.boxes.slots[2].player === "a")||
-				(self.boxes.slots[3].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[5].player === "a")||
-				(self.boxes.slots[6].player === "a" && self.boxes.slots[7].player === "a" && self.boxes.slots[8].player === "a")||
-				(self.boxes.slots[0].player === "a" && self.boxes.slots[3].player === "a" && self.boxes.slots[6].player === "a")||
-				(self.boxes.slots[1].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[7].player === "a")||
-				(self.boxes.slots[2].player === "a" && self.boxes.slots[5].player === "a" && self.boxes.slots[8].player === "a")||
-				(self.boxes.slots[0].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[8].player === "a")||
-				(self.boxes.slots[2].player === "a" && self.boxes.slots[4].player === "a" && self.boxes.slots[6].player === "a")) {
-					self.boxes.scoreP1 ++;
-					alert(self.name + " wins!");
-					self.boxes.currentPlayer = "a";
-					self.boxes.gameOver = "yes";
-					self.boxes.$save();
-			} else if((self.boxes.slots[0].player === "b" && self.boxes.slots[1].player === "b" && self.boxes.slots[2].player === "b")||
-				(self.boxes.slots[3].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[5].player === "b")||
-				(self.boxes.slots[6].player === "b" && self.boxes.slots[7].player === "b" && self.boxes.slots[8].player === "b")||
-				(self.boxes.slots[0].player === "b" && self.boxes.slots[3].player === "b" && self.boxes.slots[6].player === "b")||
-				(self.boxes.slots[1].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[7].player === "b")||
-				(self.boxes.slots[2].player === "b" && self.boxes.slots[5].player === "b" && self.boxes.slots[8].player === "b")||
-				(self.boxes.slots[0].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[8].player === "b")||
-				(self.boxes.slots[2].player === "b" && self.boxes.slots[4].player === "b" && self.boxes.slots[6].player === "b")) {
-					self.boxes.scoreP2 ++;
-					alert(self.name2 + " wins!");
-					self.boxes.currentPlayer = "a";
-					self.boxes.gameOver = "yes";
-					self.boxes.$save();
+			if( (self.fire.slots[0].player === "a" && self.fire.slots[1].player === "a" && self.fire.slots[2].player === "a")||
+				(self.fire.slots[3].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[5].player === "a")||
+				(self.fire.slots[6].player === "a" && self.fire.slots[7].player === "a" && self.fire.slots[8].player === "a")||
+				(self.fire.slots[0].player === "a" && self.fire.slots[3].player === "a" && self.fire.slots[6].player === "a")||
+				(self.fire.slots[1].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[7].player === "a")||
+				(self.fire.slots[2].player === "a" && self.fire.slots[5].player === "a" && self.fire.slots[8].player === "a")||
+				(self.fire.slots[0].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[8].player === "a")||
+				(self.fire.slots[2].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[6].player === "a")){
+					self.fire.scoreP1 ++;
+					alert(self.fire.nameP1 + " wins!");
+					self.fire.currentPlayer = "a";
+					self.fire.gameOver = "yes";
+					self.fire.$save();
+			} else if((self.fire.slots[0].player === "b" && self.fire.slots[1].player === "b" && self.fire.slots[2].player === "b")||
+				(self.fire.slots[3].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[5].player === "b")||
+				(self.fire.slots[6].player === "b" && self.fire.slots[7].player === "b" && self.fire.slots[8].player === "b")||
+				(self.fire.slots[0].player === "b" && self.fire.slots[3].player === "b" && self.fire.slots[6].player === "b")||
+				(self.fire.slots[1].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[7].player === "b")||
+				(self.fire.slots[2].player === "b" && self.fire.slots[5].player === "b" && self.fire.slots[8].player === "b")||
+				(self.fire.slots[0].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[8].player === "b")||
+				(self.fire.slots[2].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[6].player === "b")) {
+					self.fire.scoreP2 ++;
+					alert(self.fire.nameP2 + " wins!");
+					self.fire.currentPlayer = "a";
+					self.fire.gameOver = "yes";
+					self.fire.$save();
 			} else {
-				if (self.boxes.moves == 9) {
+				if (self.fire.moves == 9) {
 					alert("This has ended in a Tie!");
-					self.boxes.gameOver = "yes";
+					self.fire.gameOver = "yes";
 				} else {
 					null;
 				};
 			};			
 		};
+		//Getting the Winner. Called every mouseup. end
+		
 
+		//Resets the game when a player has won or when the game has tied. start
 		function newGame(){
-			if (self.boxes.gameOver == "yes"){
-				self.boxes.gameOver = "no";
-				self.boxes.currentPlayer = "a"
-				moves = 0;	
+			if (self.fire.gameOver == "yes"){
+				self.fire.gameOver = "no";
+				self.fire.currentPlayer = "a"
+				self.fire.moves = 0;	
 			
 				for (i = 0; i < 9; i++){
-					self.boxes.slots[i].image = "img/blank.gif";
-					self.boxes.slots[i].player = "";
+					self.fire.slots[i].image = "img/blank.gif";
+					self.fire.slots[i].player = "";
 				}
-				self.boxes.$save();
+				self.fire.$save();
 			} else {
 				null;
 			}; 
 		};
+		//Resets the game when a player has won or when the game has tied. end
+
+		//Adding player names start
+		function addPlayer1Name(){
+			self.fire.nameP1 = self.playerOneName;
+			self.fire.scoreP1 = 0;
+			self.fire.moves = 0;
+			self.fire.player1Chooses = true;
+			newGame();
+			self.fire.$save();
+		};
+		
+		function addPlayer2Name(){
+			self.fire.nameP2 = self.playerTwoName;
+			self.fire.scoreP2 = 0;
+			self.fire.moves = 0;
+			self.playerCount = 1;
+			newGame();
+			self.fire.$save();
+		};
+		//Adding player names end
 	};
 
 
