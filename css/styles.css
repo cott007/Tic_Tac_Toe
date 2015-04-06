@@ -79,15 +79,15 @@ p {
 	margin-top: 30px;
 	font-size: 30px;
 	border-radius: 5px;
-	background-color: rgba(152, 0, 2, .2);
-	border-color: rgba(152, 0, 2, .2);
-	color: rgba(152, 0, 2, .4);
+	background-color: rgba(152, 0, 2, .6);
+	border-color: rgba(152, 0, 2, .6);
+	color: rgba(152, 0, 2, 1);
 }
 
 #winnerDisplay, #winnerDisplay2, #winnerDisplay3{
-	background-image: url('../img/scare.gif');
-    background-size: 100% 100%;
-    color: rgba(152, 0, 2, .6);
+	background-image: url('../img/door.png');
+    background-size: 95% 95%;
+    color: rgba(152, 0, 2, 1);
 
     position: absolute;
     top:0;
