@@ -34,8 +34,9 @@ angular.
 			gameObject.$loaded(function(){
 				gameObject.gameOver = "no";
 				gameObject.currentPlayer = "a";
-				
-				gameObject.player1Chooses = false;
+				gameObject.winner = false;
+				gameObject.winner2 = false;
+				gameObject.winner3 = false;
 
 				gameObject.slots = [];
 				for (var i = 0; i < 9; i++) {
@@ -94,7 +95,8 @@ angular.
 				(self.fire.slots[0].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[8].player === "a")||
 				(self.fire.slots[2].player === "a" && self.fire.slots[4].player === "a" && self.fire.slots[6].player === "a")){
 					self.fire.scoreP1 ++;
-					alert(self.fire.nameP1 + " wins!");
+					// alert(self.fire.nameP1 + " wins!");
+					self.fire.winner = true;
 					self.fire.currentPlayer = "a";
 					self.fire.gameOver = "yes";
 					self.fire.$save();
@@ -107,14 +109,16 @@ angular.
 				(self.fire.slots[0].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[8].player === "b")||
 				(self.fire.slots[2].player === "b" && self.fire.slots[4].player === "b" && self.fire.slots[6].player === "b")) {
 					self.fire.scoreP2 ++;
-					alert(self.fire.nameP2 + " wins!");
+					// alert(self.fire.nameP2 + " wins!");
+					self.fire.winner2 = true;
 					self.fire.currentPlayer = "a";
 					self.fire.gameOver = "yes";
 					self.fire.$save();
 			} else {
 				if (self.fire.moves == 9) {
-					alert("This has ended in a Tie!");
+					// alert("This has ended in a Tie!");
 					self.fire.gameOver = "yes";
+					self.fire.winner3 = true;
 				} else {
 					null;
 				};
@@ -128,7 +132,9 @@ angular.
 			if (self.fire.gameOver == "yes"){
 				self.fire.gameOver = "no";
 				self.fire.currentPlayer = "a"
-				self.fire.moves = 0;	
+				self.fire.moves = 0;
+				self.fire.winner = false;
+				self.fire.winner2 = false;	
 			
 				for (i = 0; i < 9; i++){
 					self.fire.slots[i].image = "img/blank.gif";
@@ -146,6 +152,7 @@ angular.
 			self.fire.nameP1 = self.playerOneName;
 			self.fire.scoreP1 = 0;
 			self.fire.moves = 0;
+			self.playerCount = 0;
 			self.fire.player1Chooses = true;
 			newGame();
 			self.fire.$save();
@@ -155,6 +162,7 @@ angular.
 			self.fire.nameP2 = self.playerTwoName;
 			self.fire.scoreP2 = 0;
 			self.fire.moves = 0;
+			self.fire.player1Chooses = false;
 			self.playerCount = 1;
 			newGame();
 			self.fire.$save();

@@ -5,32 +5,30 @@ body {
 	text-align: center;
 }
 
-/*#playerSection {
-	border: 4px solid #940101;
-	border-radius: 10px;
-	background-color: rgba(148, 1, 1, .2);
-	display: inline-block;
-	width: 618px;
-}*/
-
 #player1 {
 	display: inline-block;
 	float: left;
 	margin-left: 5px;
 	margin-top: 5px;
-
+	max-width: 280px;
 	border: 4px solid #980002;
 	border-radius: 10px;
 	background-color: rgba(152, 0, 2, .2);
+	font-family: Papyrus, fantasy;
+	color: #000000;
+	font-style: bold
 }
 
 #player2{
 	display: inline-block;
 	float: right;
-
+	max-width: 280px;
 	border: 4px solid #980002;
 	border-radius: 10px;
 	background-color: rgba(152, 0, 2, .2);
+	font-family: Papyrus, fantasy;
+	color: #000000;
+	font-style: bold;
 }
 
 #ubcs {
@@ -45,11 +43,7 @@ body {
 }
 
 h1 {
-	margin: 0px 5px 0px 5px;
-}
-
-p {
-	margin: 0px 5px 0px 5px;
+	margin: 10px 5px 0px 5px;
 }
 
 .container{
@@ -77,22 +71,31 @@ img {
 	padding-top: 18px;
 }
 
-#boxp {
-	position: fixed;
-	color: rgba(255, 255, 255, 0);
-}
-
 p {
 	color: white;
 }
 
-#ngButton{
+#newGame{
 	margin-top: 30px;
 	font-size: 30px;
 	border-radius: 5px;
-	background-color: #980002;
-	border-color: #980002;
+	background-color: rgba(152, 0, 2, .2);
+	border-color: rgba(152, 0, 2, .2);
+	color: rgba(152, 0, 2, .4);
 }
 
+#winnerDisplay, #winnerDisplay2, #winnerDisplay3{
+	background-image: url('../img/scare.gif');
+    background-size: 100% 100%;
+    color: rgba(152, 0, 2, .6);
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	margin: auto;
+	
+}
 
 

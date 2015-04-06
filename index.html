@@ -56,14 +56,26 @@
 			<div class="box" ng-repeat="uc in uss.fire.slots" ng-mousedown="uss.addMove($index)" ng-mouseup="uss.getWinner()">
 				<img ng-src={{uc.image}}> 
 			</div>
-			<div>
-				<button ng-click="uss.newGame()" id="ngButton">New Game</button>
-			</div>
 		</div>
 		<!-- tic_tac_toe board end-->
 
 	</div> 
 	<!-- second page with game board -->
+
+	<div id="winnerDisplay" ng-show="uss.fire.winner">
+		<h1 ng-show="uss.fire.winner">{{uss.fire.nameP1}} Wins!</h1>
+		<button ng-click="uss.newGame()" id="newGame">New Game</button>
+	</div>
+
+	<div id="winnerDisplay2" ng-show="uss.fire.winner2">
+		<h1 ng-show="uss.fire.winner2">{{uss.fire.nameP2}} Wins!</h1>
+		<button ng-click="uss.newGame()" id="newGame">New Game</button>
+	</div>
+
+	<div id="winnerDisplay3" ng-show="uss.fire.winner3">
+		<h1 ng-show="uss.fire.winner3">The Game Is A Tie!</h1>
+		<button ng-click="uss.newGame()" id="newGame">New Game</button>
+	</div>
 
 
 <script type="text/javascript" src="js/angular.js"></script> <!-- sourcing angular -->
